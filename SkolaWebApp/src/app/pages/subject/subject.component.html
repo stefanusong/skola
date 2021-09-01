@@ -1,0 +1,72 @@
+<!-- MODAL FORMS -->
+
+<!-- CREATE TERM MODAL -->
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleAddTerm"
+  nzTitle="Create new term"
+  (nzOnCancel)="handleCancelAddTerm()"
+  (nzOnOk)="handleOkAddTerm()"
+  [nzOkLoading]="isCreatingTerm"
+  [nzCancelLoading]="isCreatingTerm"
+>
+  <ng-container *nzModalContent>
+    <nz-spin nzTip="Please wait..." [nzSpinning]="isCreatingTerm">
+      <h2>Choose a Grade</h2>
+      <nz-row>
+        <nz-col nzSpan="12">
+          <nz-slider
+            [nzMin]="1"
+            [nzMax]="12"
+            [(ngModel)]="newGrade"
+            (ngModelChange)="updateTempDepartment($event)"
+          ></nz-slider>
+        </nz-col>
+        <div nz-col nzSpan="4">
+          <nz-input-number
+            [nzMin]="1"
+            [nzMax]="12"
+            [ngStyle]="{ marginLeft: '16px' }"
+            [(ngModel)]="newGrade"
+            (ngModelChange)="updateTempDepartment($event)"
+          ></nz-input-number>
+        </div>
+        <input nz-input [(ngModel)]="tempDepartment" [disabled]="true" />
+      </nz-row>
+    </nz-spin>
+  </ng-container>
+</nz-modal>
+
+<!-- Page Title -->
+<h1>Subject</h1>
+<!-- Term Selection -->
+<div class="term-section">
+  <nz-select
+    nzShowSearch
+    nzAllowClear
+    nzPlaceHolder="Select term of subject"
+    [(ngModel)]="selectedTermId"
+  >
+    <nz-option
+      *ngFor="let item of listOfTerm"
+      [nzLabel]="'Grade ' + item.grade + ' - ' + department[item.department]"
+      [nzValue]="item.termId"
+    ></nz-option>
+  </nz-select>
+  <button
+    nz-button
+    nzType="default"
+    class="btn-add-term"
+    (click)="showAddTermModal()"
+  >
+    Create a Term
+  </button>
+  <button
+    nz-button
+    nzType="default"
+    nzDanger
+    (click)="showDeleteTermModal()"
+  >
+    Delete selected term
+  </button>
+</div>

@@ -1,0 +1,48 @@
+<nz-layout class="app-layout">
+  <nz-header><h1>Skola</h1></nz-header>
+  <nz-content>
+    <nz-card nzTitle="Sign In">
+      <form
+        nz-form
+        [formGroup]="validateForm"
+        class="login-form"
+        (ngSubmit)="submitForm()"
+      >
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your email!">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                type="text"
+                nz-input
+                formControlName="email"
+                placeholder="Email"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input
+                type="password"
+                nz-input
+                formControlName="password"
+                placeholder="Password"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        
+        <button
+          nz-button
+          class="login-form-button login-form-margin"
+          [nzType]="'primary'"
+        >
+          Sign in
+        </button>
+        Or
+        <a [routerLink]="['/signup']" >Sign Up now!</a>
+      </form>
+    </nz-card>
+  </nz-content>
+</nz-layout>

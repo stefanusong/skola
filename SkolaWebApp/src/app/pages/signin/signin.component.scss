@@ -1,0 +1,37 @@
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+nz-header > h1 {
+  color: white;
+  text-align: center;
+}
+
+nz-content {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+nz-card {
+  width: max-content;
+  border-radius: 18px;
+  height: 100%;
+  padding: 40px 60px;
+}
+
+.app-layout {
+  height: 100vh;
+}

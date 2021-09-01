@@ -1,0 +1,20 @@
+.app-layout {
+  height: 100vh;
+}
+
+nz-header > h1 {
+  color: white;
+  text-align: center;
+}
+
+nz-content {
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+nz-card {
+  width: 50%;
+  border-radius: 18px;
+  height: 100%;
+}
