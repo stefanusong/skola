@@ -1,4 +1,4 @@
-# SKOLA DASHBOARD
+# SKOLA (School Task Management)
 
 Frontend : Angular 12
 
