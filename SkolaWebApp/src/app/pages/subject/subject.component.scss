@@ -8,6 +8,42 @@ nz-select {
   justify-content: start;
 }
 
-.btn-add-term{
-    margin: 20px;
+.btn-add-term {
+  margin: 20px;
+}
+
+.subject-tile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(28, 26, 44);
+  border-radius: 16px;
+  color: white;
+  a {
+    color: white;
+    margin-left: 10px;
+    &:hover {
+      color: rgb(151, 213, 255);
+    }
+  }
+  width: 70%;
+  padding: 20px 30px;
+  margin: 12px 0px;
+}
+
+.action-icons {
+  right: 0;
+  i {
+    margin-right: 10px;
+    &:hover {
+      color: rgb(151, 213, 255);
+      cursor: pointer;
+    }
+  }
+}
+
+.active-task {
+  display: inline;
+  margin-right: 10px;
+  color: rgb(255, 255, 168);
 }

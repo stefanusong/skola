@@ -26,8 +26,8 @@
     >
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item [routerLink]="['home']">Home</li>
-          <li nz-menu-item [routerLink]="['subject']">Subject</li>
+          <li nz-menu-item [routerLink]="['home']" nzMatchRouter>Home</li>
+          <li nz-menu-item [routerLink]="['subject']" nzMatchRouter>Subject</li>
           <li nz-menu-item>Task</li>
         </ul>
       </li>

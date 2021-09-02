@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CreateTermDto } from 'src/app/dto/dto';
+import { CreateSubjectDto, CreateTermDto } from 'src/app/dto/dto';
+import { SubjectService } from './services/subject.service';
 import { TermService } from './services/term.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { TermService } from './services/term.service';
 export class SubjectComponent implements OnInit {
   constructor(
     private termService: TermService,
+    private subjectService: SubjectService,
     private modal: NzModalService
   ) {}
 
@@ -29,6 +31,14 @@ export class SubjectComponent implements OnInit {
   tempDepartment = this.department[this.newGrade - 1];
   isCreatingTerm = false;
   selectedTermId: string = '';
+  loadingTerm = false;
+
+  // Variable realted to subjects
+  listOfSubject: any[] = [];
+  loadingSubject = false;
+  isCreatingSubject = false;
+  newSubjectName: string = '';
+  isVisibleAddSubject = false;
 
   // FUNCTIONS OF ADD TERM MODAL
   showAddTermModal() {
@@ -56,7 +66,6 @@ export class SubjectComponent implements OnInit {
   showDeleteTermModal() {
     this.modal.confirm({
       nzTitle: 'Are you sure delete this selected term?',
-      nzContent: '<b style="color: red;">Some descriptions</b>',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
@@ -65,11 +74,13 @@ export class SubjectComponent implements OnInit {
       nzOnCancel: () => console.log('Cancel'),
     });
   }
+
   // FUNCTIONS OF TERM API
   getTerms() {
+    this.loadingTerm = true;
     this.termService.getUserTerms(this.userId!).subscribe((resp) => {
-      console.log(resp);
       this.listOfTerm = resp;
+      this.loadingTerm = false;
     });
   }
 
@@ -94,6 +105,51 @@ export class SubjectComponent implements OnInit {
     this.termService.deleteTerm(this.selectedTermId).subscribe((resp) => {
       if (resp) {
         window.location.reload();
+      }
+    });
+  }
+
+  updateListOfSubject() {
+    this.loadingSubject = true;
+    this.getSubjects();
+  }
+
+  // FUNCTIONS OF ADD SUBJECT MODAL
+  showAddSubjectModal() {
+    this.isVisibleAddSubject = true;
+  }
+
+  handleCancelAddSubject() {
+    this.isVisibleAddSubject = false;
+  }
+
+  handleOkAddSubject() {
+    this.isCreatingSubject = true;
+    this.createSubject();
+  }
+
+  // Functions of Subject API
+  getSubjects() {
+    this.subjectService
+      .getSubjectByTerm(this.selectedTermId)
+      .subscribe((resp) => {
+        if (resp) {
+          this.listOfSubject = resp;
+          this.loadingSubject = false;
+          this.isVisibleAddSubject = false;
+          this.isCreatingSubject = false;
+        }
+      });
+  }
+
+  createSubject() {
+    const body: CreateSubjectDto = {
+      subjectName: this.newSubjectName,
+      termId: this.selectedTermId,
+    };
+    this.subjectService.createNewSubject(body).subscribe((resp) => {
+      if (resp) {
+        this.getSubjects();
       }
     });
   }

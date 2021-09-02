@@ -15,3 +15,8 @@ export class CreateTermDto {
   grade!: number;
   department!: number;
 }
+
+export class CreateSubjectDto {
+  termId!: string;
+  subjectName!: string;
+}

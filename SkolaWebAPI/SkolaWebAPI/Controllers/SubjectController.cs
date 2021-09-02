@@ -38,10 +38,11 @@ namespace SkolaWebAPI.Controllers
         public async Task<IActionResult> GetSubjectByTerm([FromRoute] Guid termId)
         {
             var response = await _mediator.Send(new GetSubjectByTermQuery(termId));
-            if (!response.Any())
-            {
-                return NotFound(response);
-            }
+            //if (response.Any() || response != null)
+            //{
+            //    return Ok(response);
+            //}
+            //return NotFound(response);
             return Ok(response);
         }
     }

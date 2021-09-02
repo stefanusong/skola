@@ -29,6 +29,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -70,6 +71,7 @@ export function tokenGetter() {
     NzSliderModule,
     NzInputNumberModule,
     NzSpinModule,
+    NzListModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

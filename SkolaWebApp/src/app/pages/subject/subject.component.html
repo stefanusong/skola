@@ -37,6 +37,30 @@
   </ng-container>
 </nz-modal>
 
+<!-- CREATE SUBJECT MODAL -->
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleAddSubject"
+  nzTitle="Create new subject"
+  (nzOnCancel)="handleCancelAddSubject()"
+  (nzOnOk)="handleOkAddSubject()"
+  [nzOkLoading]="isCreatingSubject"
+  [nzCancelLoading]="isCreatingSubject"
+>
+  <ng-container *nzModalContent>
+    <nz-spin nzTip="Please wait..." [nzSpinning]="isCreatingSubject">
+      <h2>Subject Name</h2>
+      <nz-row>
+        <input
+          nz-input
+          placeholder="Enter subject name"
+          [(ngModel)]="newSubjectName"
+        />
+      </nz-row>
+    </nz-spin>
+  </ng-container>
+</nz-modal>
+
 <!-- Page Title -->
 <h1>Subject</h1>
 <!-- Term Selection -->
@@ -46,6 +70,8 @@
     nzAllowClear
     nzPlaceHolder="Select term of subject"
     [(ngModel)]="selectedTermId"
+    (ngModelChange)="updateListOfSubject()"
+    [nzLoading]="loadingTerm"
   >
     <nz-option
       *ngFor="let item of listOfTerm"
@@ -66,7 +92,34 @@
     nzType="default"
     nzDanger
     (click)="showDeleteTermModal()"
+    [disabled]="selectedTermId == ''"
   >
     Delete selected term
   </button>
+</div>
+
+<div class="subject-section" *ngIf="selectedTermId">
+  <p>Showing {{ listOfSubject.length }} subject of this term :</p>
+  <button
+    nz-button
+    nzType="primary"
+    class="btn-add-subject"
+    (click)="showAddSubjectModal()"
+  >
+    Add Subject
+  </button>
+  <nz-list nzItemLayout="horizontal" [nzLoading]="loadingSubject">
+    <nz-list-item *ngFor="let item of listOfSubject" class="subject-tile">
+      <div class="subjectname-container">
+        <i nz-icon nzType="book" nzTheme="fill"></i>
+        <a>{{ item.subjectName }}</a>
+      </div>
+      <div class="action-icons">
+        <p class="active-task">[0 Active Tasks]</p>
+        <i nz-icon nzType="edit" nzTheme="fill"></i>
+        <i nz-icon nzType="delete" nzTheme="fill"></i>
+      </div>
+    </nz-list-item>
+    <nz-list-empty *ngIf="listOfSubject.length === 0"></nz-list-empty>
+  </nz-list>
 </div>
