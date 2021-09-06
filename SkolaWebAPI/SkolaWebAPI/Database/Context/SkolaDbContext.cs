@@ -14,5 +14,6 @@ namespace SkolaWebAPI.Database.Context
 
         public DbSet<Term> Terms { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<SubjectTask> Tasks { get; set; }
     }
 }

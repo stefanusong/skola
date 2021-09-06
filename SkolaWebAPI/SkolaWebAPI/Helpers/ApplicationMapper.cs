@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SkolaWebAPI.Application.Subjects.Command.CreateSubject;
+using SkolaWebAPI.Application.Tasks.Command.AddNewTask;
 using SkolaWebAPI.Application.Terms.Command.CreateTerm;
 using SkolaWebAPI.Database.Entities;
 using System;
@@ -15,6 +16,7 @@ namespace SkolaWebAPI.Helpers
         {
             CreateMap<CreateTermCommand, Term>();
             CreateMap<CreateSubjectCommand, Subject>();
+            CreateMap<AddNewTaskCommand, SubjectTask>();
         }
     }
 }

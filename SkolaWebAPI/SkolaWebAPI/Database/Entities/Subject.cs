@@ -11,5 +11,7 @@ namespace SkolaWebAPI.Database.Entities
         public string subjectName { get; set; }
         public Guid termId { get; set; }
         public Term term { get; set; }
+
+        public ICollection<SubjectTask> Tasks { get; set; }
     }
 }
