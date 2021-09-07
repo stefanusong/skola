@@ -153,4 +153,8 @@ export class SubjectComponent implements OnInit {
       }
     });
   }
+
+  addSelectedSubject(subjectId: string, subjectName: string) {
+    this.subjectService.addSelectedSubject(subjectId, subjectName);
+  }
 }

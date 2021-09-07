@@ -1,0 +1,48 @@
+<div class="header">
+  <button nz-button nzType="primary" [routerLink]="['/dashboard/subject']">
+    <i nz-icon nzType="left"></i>
+    Go back
+  </button>
+  <h1>{{ subjectName }}</h1>
+  <h1>Mathematics</h1>
+</div>
+
+<div class="task-list">
+  <h3>You Have {{ listOfTasks.length }} Tasks :</h3>
+  <nz-collapse nzAccordion>
+    <nz-collapse-panel
+      *ngFor="let panel of listOfTasks"
+      [nzHeader]="accordTitle"
+      [nzActive]="panel.active"
+    >
+      <ng-template #accordTitle>
+        <h2 style="display: inline-block">{{ panel.taskName }}</h2>
+      </ng-template>
+      <div class="btn-group">
+        <div class="btn-edit btn-action">
+          <i nz-icon nzType="edit" nzTheme="fill"></i>
+          <p>Edit</p>
+        </div>
+        <div class="btn-complete btn-action" *ngIf="panel.isCompleted == false">
+          <i nz-icon nzType="check" nzTheme="outline"></i>
+          <p>Mark Complete</p>
+        </div>
+        <div
+          class="btn-notcomplete btn-action"
+          *ngIf="panel.isCompleted == true"
+        >
+          <i nz-icon nzType="close-circle" nzTheme="fill"></i>
+          <p>Mark Incomplete</p>
+        </div>
+        <div class="btn-archive btn-action">
+          <i nz-icon nzType="container" nzTheme="fill"></i>
+          <p>Archive</p>
+        </div>
+        <div class="btn-delete btn-action">
+          <i nz-icon nzType="delete" nzTheme="fill"></i>
+          <p>Delete</p>
+        </div>
+      </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+</div>

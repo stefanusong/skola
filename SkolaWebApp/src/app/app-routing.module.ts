@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SubjectComponent } from './pages/subject/subject.component';
+import { TaskComponent } from './pages/task/task.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
@@ -21,7 +22,11 @@ const routes: Routes = [
       {
         path: 'subject',
         component: SubjectComponent,
-      }
+      },
+      {
+        path: 'subject/tasks',
+        component: TaskComponent,
+      },
     ],
   },
   {

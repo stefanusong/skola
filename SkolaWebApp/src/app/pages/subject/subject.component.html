@@ -112,10 +112,9 @@
     <nz-list-item *ngFor="let item of listOfSubject" class="subject-tile">
       <div class="subjectname-container">
         <i nz-icon nzType="book" nzTheme="fill"></i>
-        <a>{{ item.subjectName }}</a>
+        <a (click)="addSelectedSubject(item.subjectId, item.subjectName)" [routerLink]="['/dashboard/subject/tasks']" nzMatchRouter>{{ item.subjectName }}</a>
       </div>
       <div class="action-icons">
-        <p class="active-task">[0 Active Tasks]</p>
         <i nz-icon nzType="edit" nzTheme="fill"></i>
         <i nz-icon nzType="delete" nzTheme="fill"></i>
       </div>
