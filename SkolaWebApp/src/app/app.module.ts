@@ -32,6 +32,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { TaskComponent } from './pages/task/task.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -76,6 +78,8 @@ export function tokenGetter() {
     NzSpinModule,
     NzListModule,
     NzCollapseModule,
+    NzToolTipModule,
+    NzEmptyModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

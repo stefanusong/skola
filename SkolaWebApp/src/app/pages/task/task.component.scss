@@ -7,18 +7,39 @@
   }
 }
 
+.task-list-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0px;
+}
+
+.task-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // align-items: center;
+  border-radius: 16px;
+  background-color: #000c17;
+  padding: 18px 24px;
+  h2 {
+    margin-bottom: 0px;
+    color: white;
+  }
+  margin-bottom: 15px;
+}
+
 .btn-group {
   display: flex;
+  // margin-left: 100px;
   .btn-action {
-    background-color: #001529;
-    border-width: 1px;
-    border-style: solid;
+    background-color: #14212c;
     border-radius: 14px;
-    padding: 14px 36px;
-    margin-right: 30px;
+    padding: 12px 16px;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
-    width: 250px;
+    width: fit-content;
     align-items: center;
     p {
       margin-bottom: 0px;
@@ -32,38 +53,39 @@
     }
   }
   .btn-edit {
-    border-color: rgb(255, 246, 119);
     color: rgb(255, 246, 119);
     &:hover {
       background-color: rgb(255, 246, 119);
     }
   }
   .btn-complete {
-    border-color: rgb(187, 255, 119);
     color: rgb(187, 255, 119);
     &:hover {
       background-color: rgb(187, 255, 119);
     }
   }
   .btn-notcomplete {
-    border-color: rgb(255, 196, 119);
     color: rgb(255, 196, 119);
     &:hover {
       background-color: rgb(255, 196, 119);
     }
   }
   .btn-archive {
-    border-color: rgb(190, 224, 255);
+    // border-color: rgb(190, 224, 255);
     color: rgb(190, 224, 255);
     &:hover {
       background-color: rgb(190, 224, 255);
     }
   }
   .btn-delete {
-    border-color: rgb(255, 162, 162);
     color: rgb(255, 162, 162);
     &:hover {
       background-color: rgb(255, 162, 162);
     }
   }
+}
+
+.strike-text {
+  text-decoration: line-through;
+  color: rgb(65, 63, 78) !important;
 }

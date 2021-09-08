@@ -1,48 +1,102 @@
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleAddTask"
+  nzTitle="Create new task"
+  (nzOnCancel)="handleCancelAddTask()"
+  (nzOnOk)="handleOkAddTask()"
+  [nzOkLoading]="isCreatingTask"
+  [nzCancelLoading]="isCreatingTask"
+>
+  <ng-container *nzModalContent>
+    <nz-spin nzTip="Please wait..." [nzSpinning]="isCreatingTask">
+      <h2>Task Name</h2>
+      <nz-row>
+        <input
+          nz-input
+          placeholder="Enter task name"
+          [(ngModel)]="newTaskName"
+          required
+        />
+      </nz-row>
+    </nz-spin>
+  </ng-container>
+</nz-modal>
+
 <div class="header">
-  <button nz-button nzType="primary" [routerLink]="['/dashboard/subject']">
+  <button nz-button nzType="default" [routerLink]="['/dashboard/subject']">
     <i nz-icon nzType="left"></i>
-    Go back
+    Back
   </button>
   <h1>{{ subjectName }}</h1>
-  <h1>Mathematics</h1>
 </div>
 
 <div class="task-list">
-  <h3>You Have {{ listOfTasks.length }} Tasks :</h3>
-  <nz-collapse nzAccordion>
-    <nz-collapse-panel
-      *ngFor="let panel of listOfTasks"
-      [nzHeader]="accordTitle"
-      [nzActive]="panel.active"
-    >
-      <ng-template #accordTitle>
-        <h2 style="display: inline-block">{{ panel.taskName }}</h2>
-      </ng-template>
-      <div class="btn-group">
-        <div class="btn-edit btn-action">
-          <i nz-icon nzType="edit" nzTheme="fill"></i>
-          <p>Edit</p>
-        </div>
-        <div class="btn-complete btn-action" *ngIf="panel.isCompleted == false">
-          <i nz-icon nzType="check" nzTheme="outline"></i>
-          <p>Mark Complete</p>
-        </div>
-        <div
-          class="btn-notcomplete btn-action"
-          *ngIf="panel.isCompleted == true"
-        >
-          <i nz-icon nzType="close-circle" nzTheme="fill"></i>
-          <p>Mark Incomplete</p>
-        </div>
-        <div class="btn-archive btn-action">
-          <i nz-icon nzType="container" nzTheme="fill"></i>
-          <p>Archive</p>
-        </div>
-        <div class="btn-delete btn-action">
-          <i nz-icon nzType="delete" nzTheme="fill"></i>
-          <p>Delete</p>
-        </div>
+  <div class="task-list-header">
+    <h3>You Have {{ listOfTasks.length }} Tasks :</h3>
+    <button nz-button nzType="primary" (click)="showAddTaskModal()">
+      New Task
+    </button>
+  </div>
+
+  <nz-empty *ngIf="listOfTasks.length == 0"></nz-empty>
+  <div class="task-card" *ngFor="let task of listOfTasks">
+    <div class="task-name-container">
+      <h2 [ngClass]="{ 'strike-text': task.isCompleted == true }">
+        {{ task.taskName }}
+      </h2>
+    </div>
+
+    <div class="btn-group">
+      <div
+        class="btn-edit btn-action"
+        nzTooltipTitle="Edit"
+        nzTooltipColor="yellow"
+        nz-tooltip
+      >
+        <i nz-icon nzType="edit" nzTheme="fill"></i>
+        <!-- <p>Edit</p> -->
       </div>
-    </nz-collapse-panel>
-  </nz-collapse>
+      <div
+        class="btn-complete btn-action"
+        *ngIf="task.isCompleted == false"
+        nzTooltipTitle="Mark Complete"
+        nzTooltipColor="green"
+        nz-tooltip
+        (click)="setTaskComplete(task.taskId)"
+      >
+        <i nz-icon nzType="check" nzTheme="outline"></i>
+        <!-- <p>Mark Complete</p> -->
+      </div>
+      <div
+        class="btn-notcomplete btn-action"
+        *ngIf="task.isCompleted == true"
+        nzTooltipTitle="Mark Incomplete"
+        nzTooltipColor="orange"
+        nz-tooltip
+        (click)="setTaskComplete(task.taskId)"
+      >
+        <i nz-icon nzType="close-circle" nzTheme="fill"></i>
+        <!-- <p>Mark Incomplete</p> -->
+      </div>
+      <div
+        class="btn-archive btn-action"
+        nzTooltipTitle="Archive"
+        nzTooltipColor="blue"
+        nz-tooltip
+      >
+        <i nz-icon nzType="container" nzTheme="fill"></i>
+        <!-- <p>Archive</p> -->
+      </div>
+      <div
+        class="btn-delete btn-action"
+        nzTooltipTitle="Delete"
+        nzTooltipColor="red"
+        nz-tooltip
+        (click)="showDeleteTaskModal(task.taskId)"
+      >
+        <i nz-icon nzType="delete" nzTheme="fill"></i>
+        <!-- <p>Delete</p> -->
+      </div>
+    </div>
+  </div>
 </div>
