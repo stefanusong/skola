@@ -43,11 +43,20 @@
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></i>
         </span>
-        <span>
-          <a nz-dropdown [nzDropdownMenu]="menu">
-            <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
-          </a>
-        </span>
+        <div class="profile">
+          <span>
+            <h3>{{ name }}</h3>
+          </span>
+          <span>
+            <a nz-dropdown [nzDropdownMenu]="menu">
+              <nz-avatar
+                nzSize="large"
+                nzIcon="user"
+                nzSrc="https://celebslifereel.com/wp-content/uploads/2021/04/Khabane-Lame.jpg"
+              ></nz-avatar>
+            </a>
+          </span>
+        </div>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item>Profile</li>

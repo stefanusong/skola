@@ -22,6 +22,30 @@
   </ng-container>
 </nz-modal>
 
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleEditTask"
+  nzTitle="Edit this task"
+  (nzOnCancel)="handleCancelEditTask()"
+  (nzOnOk)="handleOkEditTask()"
+  [nzOkLoading]="isUpdatingTask"
+  [nzCancelLoading]="isUpdatingTask"
+>
+  <ng-container *nzModalContent>
+    <nz-spin nzTip="Please wait..." [nzSpinning]="isUpdatingTask">
+      <h2>Task Name</h2>
+      <nz-row>
+        <input
+          nz-input
+          placeholder="Enter task name"
+          [(ngModel)]="updatedTaskDto.taskName"
+          required
+        />
+      </nz-row>
+    </nz-spin>
+  </ng-container>
+</nz-modal>
+
 <div class="header">
   <button nz-button nzType="default" [routerLink]="['/dashboard/subject']">
     <i nz-icon nzType="left"></i>
@@ -52,6 +76,7 @@
         nzTooltipTitle="Edit"
         nzTooltipColor="yellow"
         nz-tooltip
+        (click)="showEditTaskModal(task.taskId, task.taskName)"
       >
         <i nz-icon nzType="edit" nzTheme="fill"></i>
         <!-- <p>Edit</p> -->
@@ -83,6 +108,7 @@
         nzTooltipTitle="Archive"
         nzTooltipColor="blue"
         nz-tooltip
+        (click)="showArchiveTaskModal(task.taskId)"
       >
         <i nz-icon nzType="container" nzTheme="fill"></i>
         <!-- <p>Archive</p> -->

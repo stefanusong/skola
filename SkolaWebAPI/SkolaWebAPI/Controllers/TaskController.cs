@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkolaWebAPI.Application.Tasks.Command.AddNewTask;
+using SkolaWebAPI.Application.Tasks.Command.ArchiveTask;
 using SkolaWebAPI.Application.Tasks.Command.DeleteTask;
+using SkolaWebAPI.Application.Tasks.Command.EditTask;
 using SkolaWebAPI.Application.Tasks.Command.SetCompleteStatus;
 using SkolaWebAPI.Application.Tasks.Query.GetTaskBySubject;
 using System;
@@ -29,7 +31,7 @@ namespace SkolaWebAPI.Controllers
         public async Task<IActionResult> addNewTask([FromBody] AddNewTaskCommand body)
         {
             var res = await _mediator.Send(body);
-            if(res == Guid.Empty)
+            if (res == Guid.Empty)
             {
                 return BadRequest(res);
             }
@@ -40,7 +42,7 @@ namespace SkolaWebAPI.Controllers
         public async Task<IActionResult> getTaskBySubject([FromRoute] Guid subjectId)
         {
             var res = await _mediator.Send(new GetTaskBySubjectCommand(subjectId));
-            if(res == null)
+            if (res == null)
             {
                 return BadRequest(res);
             }
@@ -51,9 +53,31 @@ namespace SkolaWebAPI.Controllers
         public async Task<IActionResult> setTaskCompleteStatus([FromRoute] Guid taskId)
         {
             var res = await _mediator.Send(new SetCompleteStatusCommand(taskId));
-            if(res == false)
+            if (res == false)
             {
                 return BadRequest(res);
+            }
+            return Ok(res);
+        }
+
+        [HttpPut("Archive/{taskId}")]
+        public async Task<IActionResult> archiveTask([FromRoute] Guid taskId)
+        {
+            var res = await _mediator.Send(new ArchiveTaskCommand(taskId));
+            if (res == false)
+            {
+                return NotFound(res);
+            }
+            return Ok(res);
+        }
+
+        [HttpPut("Edit")]
+        public async Task<IActionResult> editTask([FromBody] EditTaskCommand body )
+        {
+            var res = await _mediator.Send(body);
+            if(res == false)
+            {
+                return NotFound(res);
             }
             return Ok(res);
         }

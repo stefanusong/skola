@@ -65,7 +65,7 @@ export class SubjectComponent implements OnInit {
   // FUNCTIONS OF DELETE TERM MODAL
   showDeleteTermModal() {
     this.modal.confirm({
-      nzTitle: 'Are you sure delete the selected term?',
+      nzTitle: 'Are you sure to delete the selected term?',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,

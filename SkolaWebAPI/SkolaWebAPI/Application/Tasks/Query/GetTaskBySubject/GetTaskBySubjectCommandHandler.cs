@@ -19,7 +19,7 @@ namespace SkolaWebAPI.Application.Tasks.Query.GetTaskBySubject
         }
         public Task<List<SubjectTask>> Handle(GetTaskBySubjectCommand request, CancellationToken cancellationToken)
         {
-            var res = _dbContext.Tasks.Where(x => x.subjectId == request.subjectId).ToList();
+            var res = _dbContext.Tasks.Where(x => x.subjectId == request.subjectId && x.isArchived == false).ToList();
             return Task.FromResult(res);
         }
     }

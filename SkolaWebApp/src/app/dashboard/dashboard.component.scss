@@ -64,7 +64,7 @@ nz-header {
 .app-header {
   position: relative;
   height: 64px;
-  padding: 0px 30px;
+  padding: 30px 30px;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   display: flex;
@@ -80,4 +80,19 @@ nz-content {
   padding: 24px;
   background: #fff;
   height: 100%;
+}
+
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #15102d;
+  padding: 14px 18px;
+  border-radius: 12px;
+  h3 {
+    margin-bottom: 0px;
+    color: white;
+    margin-right: 24px;
+  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CreateTaskDto } from 'src/app/dto/dto';
+import { CreateTaskDto, EditTaskDto } from 'src/app/dto/dto';
 import { SubjectService } from '../subject/services/subject.service';
 import { TaskService } from './services/task.service';
 
@@ -29,8 +29,11 @@ export class TaskComponent implements OnInit {
   // listOfTasks: any[] = [{ taskName: 'wkwkwkwkwkwkwkwkk', isCompleted: true }];
   listOfTasks: any[] = [];
   newTaskName = '';
+  updatedTaskDto: EditTaskDto = { taskId: '', taskName: '' };
   isCreatingTask = false;
+  isUpdatingTask = false;
   isVisibleAddTask = false;
+  isVisibleEditTask = false;
 
   //API CALLS
   getTasks() {
@@ -39,6 +42,8 @@ export class TaskComponent implements OnInit {
         this.listOfTasks = resp;
         this.isCreatingTask = false;
         this.isVisibleAddTask = false;
+        this.isUpdatingTask = false;
+        this.isVisibleEditTask = false;
       }
     });
   }
@@ -72,6 +77,22 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  archiveTask(taskId: string) {
+    this.taskService.archiveTask(taskId).subscribe((resp) => {
+      if (resp == true) {
+        this.getTasks();
+      }
+    });
+  }
+
+  editTask() {
+    this.taskService.editTask(this.updatedTaskDto).subscribe((resp) => {
+      if (resp) {
+        this.getTasks();
+      }
+    });
+  }
+
   // Add task modal
   showAddTaskModal() {
     this.isVisibleAddTask = true;
@@ -89,7 +110,7 @@ export class TaskComponent implements OnInit {
   //Delete task mdoal
   showDeleteTaskModal(taskId: string) {
     this.modal.confirm({
-      nzTitle: 'Are you sure delete the selected task?',
+      nzTitle: 'Are you sure to delete the selected task?',
       nzOkText: 'Yes',
       nzOkType: 'primary',
       nzOkDanger: true,
@@ -97,5 +118,34 @@ export class TaskComponent implements OnInit {
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel'),
     });
+  }
+
+  //Archive task modal
+  showArchiveTaskModal(taskId: string) {
+    this.modal.confirm({
+      nzTitle: 'Are you sure to archive the selected task?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: async () => await this.archiveTask(taskId),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel'),
+    });
+  }
+
+  //Edit task modal
+  showEditTaskModal(taskId: string, taskName: string) {
+    this.updatedTaskDto.taskName = taskName;
+    this.updatedTaskDto.taskId = taskId;
+    this.isVisibleEditTask = true;
+  }
+
+  handleCancelEditTask() {
+    this.isVisibleEditTask = false;
+  }
+
+  handleOkEditTask() {
+    this.isUpdatingTask = true;
+    this.editTask();
   }
 }

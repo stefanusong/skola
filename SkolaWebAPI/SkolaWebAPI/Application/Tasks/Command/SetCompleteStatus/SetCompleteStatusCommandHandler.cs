@@ -18,7 +18,7 @@ namespace SkolaWebAPI.Application.Tasks.Command.SetCompleteStatus
         }
         public async Task<bool> Handle(SetCompleteStatusCommand request, CancellationToken cancellationToken)
         {
-            var res = _dbContext.Tasks.Where(x => x.TaskId == request.taskId).FirstOrDefault();
+            var res = await _dbContext.Tasks.FindAsync(request.taskId);
 
             if(res == null)
             {

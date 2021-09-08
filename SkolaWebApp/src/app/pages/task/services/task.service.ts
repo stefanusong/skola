@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateTaskDto } from 'src/app/dto/dto';
+import { CreateTaskDto, EditTaskDto } from 'src/app/dto/dto';
 import { BaseService } from 'src/app/services/base.service';
 
 @Injectable({
@@ -23,5 +23,13 @@ export class TaskService {
 
   deleteTask(taskId: string): Observable<any> {
     return this.baseService.delete(`Task/${taskId}`);
+  }
+
+  archiveTask(taskId: string): Observable<any> {
+    return this.baseService.update(`Task/Archive/${taskId}`, {});
+  }
+
+  editTask(editedTask: EditTaskDto): Observable<any> {
+    return this.baseService.update(`Task/Edit`, editedTask);
   }
 }
