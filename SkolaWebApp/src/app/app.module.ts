@@ -34,6 +34,7 @@ import { TaskComponent } from './pages/task/task.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { ArchivedTasksComponent } from './pages/archived-tasks/archived-tasks.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,6 +48,7 @@ export function tokenGetter() {
     HomeComponent,
     SubjectComponent,
     TaskComponent,
+    ArchivedTasksComponent,
   ],
   imports: [
     JwtModule.forRoot({

@@ -32,4 +32,8 @@ export class TaskService {
   editTask(editedTask: EditTaskDto): Observable<any> {
     return this.baseService.update(`Task/Edit`, editedTask);
   }
+
+  getArchivedTask(): Observable<any> {
+    return this.baseService.read('Task/Archived');
+  }
 }

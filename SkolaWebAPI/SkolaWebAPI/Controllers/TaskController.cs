@@ -7,6 +7,7 @@ using SkolaWebAPI.Application.Tasks.Command.ArchiveTask;
 using SkolaWebAPI.Application.Tasks.Command.DeleteTask;
 using SkolaWebAPI.Application.Tasks.Command.EditTask;
 using SkolaWebAPI.Application.Tasks.Command.SetCompleteStatus;
+using SkolaWebAPI.Application.Tasks.Query.GetArchivedTask;
 using SkolaWebAPI.Application.Tasks.Query.GetTaskBySubject;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,13 @@ namespace SkolaWebAPI.Controllers
             {
                 return BadRequest(res);
             }
+            return Ok(res);
+        }
+
+        [HttpGet("Archived")]
+        public async Task<IActionResult> getArchivedTasks()
+        {
+            var res = await _mediator.Send(new GetArchivedTaskCommand());
             return Ok(res);
         }
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ArchivedTasksComponent } from './pages/archived-tasks/archived-tasks.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'subject/tasks',
         component: TaskComponent,
+      },
+      {
+        path: 'archived-tasks',
+        component: ArchivedTasksComponent,
       },
     ],
   },

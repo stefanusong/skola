@@ -1,0 +1,34 @@
+<div class="task-list-container">
+  <div class="task-list-header">
+    <h3>You Have {{ archivedTasks.length }} Archived Tasks :</h3>
+  </div>
+  <nz-empty *ngIf="archivedTasks.length == 0"></nz-empty>
+  <div class="task-container" *ngFor="let task of archivedTasks">
+    <div class="task-name-container">
+      <h2>
+        {{ task.taskName }}
+      </h2>
+    </div>
+
+    <div class="btn-group">
+      <div
+        class="btn-unarchive btn-action"
+        nzTooltipTitle="Unarchive"
+        nzTooltipColor="blue"
+        nz-tooltip
+        (click)="showUnarchiveTaskModal(task.taskId)"
+      >
+        <i nz-icon nzType="container" nzTheme="fill"></i>
+      </div>
+      <div
+        class="btn-delete btn-action"
+        nzTooltipTitle="Delete"
+        nzTooltipColor="red"
+        nz-tooltip
+        (click)="showDeleteTaskModal(task.taskId)"
+      >
+        <i nz-icon nzType="delete" nzTheme="fill"></i>
+      </div>
+    </div>
+  </div>
+</div>
