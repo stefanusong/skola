@@ -35,8 +35,18 @@ nz-select {
   right: 0;
   i {
     margin-right: 10px;
+  }
+
+  .i-edit {
     &:hover {
       color: rgb(151, 213, 255);
+      cursor: pointer;
+    }
+  }
+
+  .i-delete {
+    &:hover {
+      color: rgb(255, 151, 151);
       cursor: pointer;
     }
   }

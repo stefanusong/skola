@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreateSubjectDto } from 'src/app/dto/dto';
+import { CreateSubjectDto, EditSubjectDto } from 'src/app/dto/dto';
 import { BaseService } from 'src/app/services/base.service';
 
 @Injectable({
@@ -18,6 +18,14 @@ export class SubjectService {
 
   createNewSubject(body: CreateSubjectDto): Observable<any> {
     return this.baseService.create('Subject', body);
+  }
+
+  editSubject(body: EditSubjectDto): Observable<any> {
+    return this.baseService.update('Subject/Edit', body);
+  }
+
+  deleteSubject(subjectId: string): Observable<any> {
+    return this.baseService.delete(`Subject/${subjectId}`);
   }
 
   addSelectedSubject(subjectId: string, subjectName: string) {

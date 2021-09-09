@@ -61,6 +61,31 @@
   </ng-container>
 </nz-modal>
 
+<!-- EDIT SUBJECT MODAL -->
+<nz-modal
+  [nzStyle]="{ top: '20px' }"
+  [(nzVisible)]="isVisibleEditSubject"
+  nzTitle="Edit this subject"
+  (nzOnCancel)="handleCancelEditSubject()"
+  (nzOnOk)="handleOkEditSubject()"
+  [nzOkLoading]="isUpdatingSubject"
+  [nzCancelLoading]="isUpdatingSubject"
+>
+  <ng-container *nzModalContent>
+    <nz-spin nzTip="Please wait..." [nzSpinning]="isUpdatingSubject">
+      <h2>Subject Name</h2>
+      <nz-row>
+        <input
+          nz-input
+          placeholder="Enter subject name"
+          [(ngModel)]="editedSubject.subjectName"
+          required
+        />
+      </nz-row>
+    </nz-spin>
+  </ng-container>
+</nz-modal>
+
 <!-- Page Title -->
 <h1>Subject</h1>
 <!-- Term Selection -->
@@ -112,11 +137,34 @@
     <nz-list-item *ngFor="let item of listOfSubject" class="subject-tile">
       <div class="subjectname-container">
         <i nz-icon nzType="book" nzTheme="fill"></i>
-        <a (click)="addSelectedSubject(item.subjectId, item.subjectName)" [routerLink]="['/dashboard/subject/tasks']" nzMatchRouter>{{ item.subjectName }}</a>
+        <a
+          (click)="addSelectedSubject(item.subjectId, item.subjectName)"
+          [routerLink]="['/dashboard/subject/tasks']"
+          nzMatchRouter
+          >{{ item.subjectName }}</a
+        >
       </div>
       <div class="action-icons">
-        <i nz-icon nzType="edit" nzTheme="fill"></i>
-        <i nz-icon nzType="delete" nzTheme="fill"></i>
+        <i
+          class="i-edit"
+          nz-icon
+          nzType="edit"
+          nzTheme="fill"
+          nzTooltipTitle="Edit"
+          nzTooltipColor="blue"
+          nz-tooltip
+          (click)="showEditSubjectModal(item.subjectId, item.subjectName)"
+        ></i>
+        <i
+          class="i-delete"
+          nz-icon
+          nzType="delete"
+          nzTheme="fill"
+          nzTooltipTitle="Delete"
+          nzTooltipColor="red"
+          nz-tooltip
+          (click)="showDeleteSubjectModal(item.subjectId)"
+        ></i>
       </div>
     </nz-list-item>
     <nz-list-empty *ngIf="listOfSubject.length === 0"></nz-list-empty>

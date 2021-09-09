@@ -21,6 +21,11 @@ export class CreateSubjectDto {
   subjectName!: string;
 }
 
+export class EditSubjectDto {
+  subjectId!: string;
+  subjectName!: string;
+}
+
 export class CreateTaskDto {
   subjectId!: string;
   taskName!: string;

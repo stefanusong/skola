@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CreateSubjectDto, CreateTermDto } from 'src/app/dto/dto';
+import {
+  CreateSubjectDto,
+  CreateTermDto,
+  EditSubjectDto,
+} from 'src/app/dto/dto';
 import { SubjectService } from './services/subject.service';
 import { TermService } from './services/term.service';
 
@@ -39,6 +43,9 @@ export class SubjectComponent implements OnInit {
   isCreatingSubject = false;
   newSubjectName: string = '';
   isVisibleAddSubject = false;
+  isUpdatingSubject = false;
+  isVisibleEditSubject = false;
+  editedSubject: EditSubjectDto = { subjectId: '', subjectName: '' };
 
   // FUNCTIONS OF ADD TERM MODAL
   showAddTermModal() {
@@ -138,6 +145,8 @@ export class SubjectComponent implements OnInit {
           this.loadingSubject = false;
           this.isVisibleAddSubject = false;
           this.isCreatingSubject = false;
+          this.isVisibleEditSubject = false;
+          this.isUpdatingSubject = false;
         }
       });
   }
@@ -156,5 +165,50 @@ export class SubjectComponent implements OnInit {
 
   addSelectedSubject(subjectId: string, subjectName: string) {
     this.subjectService.addSelectedSubject(subjectId, subjectName);
+  }
+
+  // Edit Subject Modal
+  showEditSubjectModal(subjectId: string, subjectName: string) {
+    this.editedSubject.subjectId = subjectId;
+    this.editedSubject.subjectName = subjectName;
+    this.isVisibleEditSubject = true;
+  }
+
+  EditSubject() {
+    this.subjectService.editSubject(this.editedSubject).subscribe((resp) => {
+      if (resp) {
+        this.getSubjects();
+      }
+    });
+  }
+
+  handleCancelEditSubject() {
+    this.isVisibleEditSubject = false;
+  }
+
+  handleOkEditSubject() {
+    this.isUpdatingSubject = true;
+    this.EditSubject();
+  }
+
+  // Delete Subject Modal
+  deleteSubject(subjectId: string) {
+    this.subjectService.deleteSubject(subjectId).subscribe((resp) => {
+      if (resp) {
+        this.getSubjects();
+      }
+    });
+  }
+
+  showDeleteSubjectModal(subjectId: string) {
+    this.modal.confirm({
+      nzTitle: 'Are you sure to delete the selected subject?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: async () => await this.deleteSubject(subjectId),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel'),
+    });
   }
 }

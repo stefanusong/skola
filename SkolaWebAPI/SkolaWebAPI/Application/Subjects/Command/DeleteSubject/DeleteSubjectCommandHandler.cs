@@ -7,23 +7,24 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SkolaWebAPI.Application.Tasks.Command.DeleteTask
+namespace SkolaWebAPI.Application.Subjects.Command.DeleteSubject
 {
-    public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand, bool>
+    public class DeleteSubjectCommandHandler : IRequestHandler<DeleteSubjectCommand, bool>
     {
         private readonly SkolaDbContext _dbContext;
 
-        public DeleteTaskCommandHandler(SkolaDbContext dbContext)
+        public DeleteSubjectCommandHandler(SkolaDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task<bool> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteSubjectCommand request, CancellationToken cancellationToken)
         {
-            var deletedTask = new SubjectTask()
+            var deletedSubject = new Subject()
             {
-                TaskId = request.taskId
+                subjectId = request.subjectId
             };
-            _dbContext.Tasks.Remove(deletedTask);
+
+            _dbContext.Subjects.Remove(deletedSubject);
             try
             {
                 await _dbContext.SaveChangesAsync();
