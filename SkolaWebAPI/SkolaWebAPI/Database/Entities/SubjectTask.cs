@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SkolaWebAPI.Database.Entities
@@ -15,6 +16,8 @@ namespace SkolaWebAPI.Database.Entities
         public bool isArchived { get; set; }
 
         public Guid subjectId { get; set; }
+
+        [JsonIgnore]
         public Subject Subject { get; set; }
     }
 }

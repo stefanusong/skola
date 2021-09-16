@@ -11,7 +11,6 @@ namespace SkolaWebAPI.Database.Entities
     public class User : IdentityUser
     {
         public string FullName { get; set; }
-
         public ICollection<Term> Terms { get; set; }
     }
 }

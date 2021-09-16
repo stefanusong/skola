@@ -1,0 +1,58 @@
+.percentage-container {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+}
+
+.generalstats-container {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+}
+
+.specificstats-container {
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+}
+
+.percentage-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(193, 222, 255);
+  padding: 12px;
+  border-radius: 14px;
+  margin-right: 24px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.ant-progress-circle .ant-progress-text {
+    color: white !important;
+}
+
+.gen-statistic-card, .statistic-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #0c1f31;
+  padding: 12px;
+  border-radius: 14px;
+  margin-right: 24px;
+  width: 200px;
+  h2 {
+    margin-left: 10px;
+    color: white !important;
+  }
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    opacity: 0.7;
+  }
+}

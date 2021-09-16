@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SkolaWebAPI.Database.Entities
@@ -25,6 +26,8 @@ namespace SkolaWebAPI.Database.Entities
         public DepartmentType Department { get; set; }
 
         public string UserId { get; set; }
+        
+        [JsonIgnore]
         public User User { get; set; }
 
         public ICollection<Subject> subjects { get; set; }

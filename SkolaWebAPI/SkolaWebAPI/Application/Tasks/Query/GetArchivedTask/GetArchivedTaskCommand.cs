@@ -9,9 +9,11 @@ namespace SkolaWebAPI.Application.Tasks.Query.GetArchivedTask
 {
     public class GetArchivedTaskCommand : IRequest<List<SubjectTask>>
     {
-        public GetArchivedTaskCommand()
+        public GetArchivedTaskCommand(string userId)
         {
-
+            this.userId = userId;
         }
+
+        public string userId { get; set; }
     }
 }

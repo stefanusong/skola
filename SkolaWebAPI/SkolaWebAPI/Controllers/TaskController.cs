@@ -50,10 +50,10 @@ namespace SkolaWebAPI.Controllers
             return Ok(res);
         }
 
-        [HttpGet("Archived")]
-        public async Task<IActionResult> getArchivedTasks()
+        [HttpGet("Archived/{userId}")]
+        public async Task<IActionResult> getArchivedTasks([FromRoute] string userId)
         {
-            var res = await _mediator.Send(new GetArchivedTaskCommand());
+            var res = await _mediator.Send(new GetArchivedTaskCommand(userId));
             return Ok(res);
         }
 

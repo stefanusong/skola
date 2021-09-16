@@ -1,0 +1,48 @@
+<div class="generalstats-container">
+  <div class="gen-statistic-card">
+    <h2>{{ totalTerms }}</h2>
+    <h2>Terms</h2>
+  </div>
+
+  <div class="gen-statistic-card">
+    <h2>{{ totalSubjects }}</h2>
+    <h2>Subjects</h2>
+  </div>
+
+  <div class="gen-statistic-card">
+    <h2>{{ totalTasks }}</h2>
+    <h2>Tasks</h2>
+  </div>
+</div>
+
+<div class="percentage-container">
+  <div class="percentage-card">
+    <h2>Tasks In Progress</h2>
+    <nz-progress
+      [nzPercent]="onProgressPercentage"
+      nzType="circle"
+    ></nz-progress>
+    <h3>Total : {{ totalIncomplete }}</h3>
+  </div>
+
+  <div class="percentage-card">
+    <h2>Tasks Completed</h2>
+    <nz-progress
+      [nzPercent]="completedPercentage"
+      nzType="circle"
+    ></nz-progress>
+    <h3>Total : {{ totalCompleted }}</h3>
+  </div>
+</div>
+
+<div class="specificstats-container">
+  <div class="statistic-card">
+    <h2>Active Tasks</h2>
+    <h2>{{ totalActiveTasks }}</h2>
+  </div>
+
+  <div class="statistic-card">
+    <h2>Archived Tasks</h2>
+    <h2>{{ totalArchived }}</h2>
+  </div>
+</div>

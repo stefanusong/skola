@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SkolaWebAPI.Database.Context;
 using SkolaWebAPI.Database.Entities;
 using System;
@@ -17,10 +18,25 @@ namespace SkolaWebAPI.Application.Tasks.Query.GetArchivedTask
         {
             _dbContext = dbContext;
         }
-        public Task<List<SubjectTask>> Handle(GetArchivedTaskCommand request, CancellationToken cancellationToken)
+        public async Task<List<SubjectTask>> Handle(GetArchivedTaskCommand request, CancellationToken cancellationToken)
         {
-            var res = _dbContext.Tasks.Where(x => x.isArchived == true).ToList();
-            return Task.FromResult(res);
+            var terms = await _dbContext.Terms
+                .Where(x => x.UserId == request.userId)
+                .Include(term => term.subjects)
+                .ThenInclude(subject => subject.Tasks.Where(task => task.isArchived == true))
+                .ToListAsync();
+
+            List<SubjectTask> tasks = new List<SubjectTask>();
+
+            foreach(var term in terms)
+            {
+                foreach(var subject in term.subjects)
+                {
+                    tasks.AddRange(subject.Tasks);
+                }
+            }
+            
+            return tasks;
         }
     }
 }

@@ -33,7 +33,11 @@ export class TaskService {
     return this.baseService.update(`Task/Edit`, editedTask);
   }
 
-  getArchivedTask(): Observable<any> {
-    return this.baseService.read('Task/Archived');
+  getArchivedTask(userId: string): Observable<any> {
+    return this.baseService.read(`Task/Archived/${userId}`);
   }
+
+ getStatistics(userId: string) : Observable<any> {
+   return this.baseService.read(`User/${userId}/statistic`);
+ }
 }

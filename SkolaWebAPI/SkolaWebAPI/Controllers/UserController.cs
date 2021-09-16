@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SkolaWebAPI.Application.UserAccount.Command.SignIn;
 using SkolaWebAPI.Application.UserAccount.Command.SignUp;
 using SkolaWebAPI.Application.UserAccount.Query;
+using SkolaWebAPI.Application.UserAccount.Query.GetUserStats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,17 @@ namespace SkolaWebAPI.Controllers
             if(response == null)
             {
                 return NotFound();
+            }
+            return Ok(response);
+        }
+
+        [HttpGet("{userId}/statistic")]
+        public async Task<IActionResult> GetUserStatistic([FromRoute] string userId)
+        {
+            var response = await _mediator.Send(new GetUserStatsQuery(userId));
+            if(response == null)
+            {
+                return NotFound(response);
             }
             return Ok(response);
         }

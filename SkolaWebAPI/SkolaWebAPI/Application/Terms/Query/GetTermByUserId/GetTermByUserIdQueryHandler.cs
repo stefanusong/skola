@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SkolaWebAPI.Database.Context;
 using SkolaWebAPI.Database.Entities;
 using System;
@@ -17,10 +18,15 @@ namespace SkolaWebAPI.Application.Terms.Query.GetTermByUserId
         {
             _dbContext = dbContext;
         }
-        public Task<List<Term>> Handle(GetTermByUserIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<Term>> Handle(GetTermByUserIdQuery request, CancellationToken cancellationToken)
         {
-            var term =  _dbContext.Terms.Where(x => x.UserId == request.userId).OrderBy(y => y.Department).ThenBy(z => z.Grade).ToList();
-            return Task.FromResult(term);
+            var term = await _dbContext.Terms
+                .Where(x => x.UserId == request.userId)
+                .OrderBy(y => y.Department)
+                .ThenBy(z => z.Grade)
+                .ToListAsync();
+
+            return term;
         }
     }
 }

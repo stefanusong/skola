@@ -35,6 +35,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { ArchivedTasksComponent } from './pages/archived-tasks/archived-tasks.component';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -82,6 +83,7 @@ export function tokenGetter() {
     NzCollapseModule,
     NzToolTipModule,
     NzEmptyModule,
+    NzProgressModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

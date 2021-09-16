@@ -23,7 +23,7 @@ export class ArchivedTasksComponent implements OnInit {
 
   // API CALLS
   getArchivedTasks() {
-    this.taskService.getArchivedTask().subscribe((resp) => {
+    this.taskService.getArchivedTask(localStorage.getItem('userid') || "").subscribe((resp) => {
       if (resp) {
         this.archivedTasks = resp;
         this.isLoadingTasks = false;
